@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
 	mobile: {
 		type: Number,
 		unique: true
+	},
+	profile:{
+		type:String,
 	}
 }, {
 	timestamps: true

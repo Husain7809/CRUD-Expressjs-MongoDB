@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 const User = require('./../models/user');
 
 const login = async (req, res) => {
@@ -53,6 +54,7 @@ const createUser = async (req, res) => {
 		user.email = email;
 		user.password = await hashPassword(password);
 		user.mobile = mobile;
+		user.profile = req.file.filename;
 
 		const userDetail = await User.create(user);
 		delete userDetail.password;
@@ -63,7 +65,7 @@ const createUser = async (req, res) => {
 			data: userDetail
 		})
 	} catch (error) {
-		console.log(error);
+		throw new Error(error.message)
 	}
 }
 
